@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://4gg0a7ua3px0"]
+
+[ext_resource type="Script" path="res://level.cs" id="1_6gvxb"]
+[ext_resource type="Script" path="res://Map.cs" id="1_iixeq"]
+[ext_resource type="Texture2D" uid="uid://cxjx3um3o6nmq" path="res://assets/tilesets/grass.png" id="2_lnvjq"]
+[ext_resource type="Texture2D" uid="uid://dilwo7w7y8yp3" path="res://assets/tilesets/decor_16x16.png" id="3_6w7cm"]
+[ext_resource type="Script" path="res://camera.cs" id="4_sahby"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ruww"]
+texture = ExtResource("2_lnvjq")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_100ki"]
+texture = ExtResource("3_6w7cm")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ggt8c"]
+sources/0 = SubResource("TileSetAtlasSource_4ruww")
+sources/1 = SubResource("TileSetAtlasSource_100ki")
+
+[node name="Level" type="Node" node_paths=PackedStringArray("coords")]
+script = ExtResource("1_6gvxb")
+coords = NodePath("")
+
+[node name="Map" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_ggt8c")
+format = 2
+script = ExtResource("1_iixeq")
+MapSize = Vector2(250, 250)
+
+[node name="camera" type="Camera2D" parent="." node_paths=PackedStringArray("Map")]
+script = ExtResource("4_sahby")
+Map = NodePath("../Map")
